@@ -152,9 +152,158 @@ var testDefs = [
                 }]
             }
         },
-        processes: [
-            //TODO: Check that magnifier is launched
-        ]
+        processes: [{
+            "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
+            "expect": 1
+        }]
+    }, {
+        name: "Testing os_common using Flat matchmaker",
+        gpiiConfig: {
+            nodeEnv: "development-config",
+            configPath: __dirname+"/integrationTests/setup1/configs"
+        },
+        token: "os_common",
+        settingsHandlers: {
+            "gpii.windows.registrySettingsHandler": {
+                "data": [
+                    {
+                        "settings": {
+                            "FollowFocus": {
+                                "value": 0,
+                                "dataType": "REG_DWORD"
+                            },
+                            "FollowCaret": {
+                                "value": 1,
+                                "dataType": "REG_DWORD"
+                            },
+                            "FollowMouse": {
+                                "value": 1,
+                                "dataType": "REG_DWORD"
+                            },
+                            "Invert": {
+                                "value": true,
+                                "dataType": "REG_DWORD"
+                            },
+                            "Magnification": {
+                                "value": 150,
+                                "dataType": "REG_DWORD"
+                            },
+                            "MagnificationMode": {
+                                "value": 3,
+                                "dataType": "REG_DWORD"
+                            }
+                        },
+                        "options": {
+                            "hKey": "HKEY_CURRENT_USER",
+                            "path": "Software\\Microsoft\\ScreenMagnifier"
+                        }
+                    }, {
+                        "settings": {
+                            "No": {
+                                "value": "%SystemRoot%\\cursors\\aero_unavail_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "Hand": {
+                                "value": "%SystemRoot%\\cursors\\aero_link_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "Help": {
+                                "value": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "Wait": {
+                                "value": "%SystemRoot%\\cursors\\aero_busy_xl.ani",
+                                "dataType": "REG_SZ"
+                            },
+                            "Arrow": {
+                                "value": "%SystemRoot%\\cursors\\aero_arrow_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "NWPen": {
+                                "value": "%SystemRoot%\\cursors\\aero_pen_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "SizeNS": {
+                                "value": "%SystemRoot%\\cursors\\aero_ns_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "SizeWE": {
+                                "value": "%SystemRoot%\\cursors\\aero_ew_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "SizeAll": {
+                                "value": "%SystemRoot%\\cursors\\aero_move_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "UpArrow": {
+                                "value": "%SystemRoot%\\cursors\\aero_up_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "SizeNESW": {
+                                "value": "%SystemRoot%\\cursors\\aero_nesw_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "SizeNWSE": {
+                                "value": "%SystemRoot%\\cursors\\aero_nwse_xl.cur",
+                                "dataType": "REG_SZ"
+                            },
+                            "AppStarting": {
+                                "value": "%SystemRoot%\\cursors\\aero_working_xl.ani",
+                                "dataType": "REG_SZ"
+                            }
+                        },
+                        "options": {
+                            "hKey": "HKEY_CURRENT_USER",
+                            "path": "ControlPanel\\Cursors"
+                        }
+                    }
+                ]
+            },
+            "gpii.windows.spiSettingsHandler.set": {
+                "data": [
+                    {
+                        "settings": {
+                            "HighContrastOn": {
+                                "path": "pvParam.dwFlags.HCF_HIGHCONTRASTON",
+                                "value": true
+                            }
+                        },
+                        "options": {
+                            "getAction": "SPI_GETHIGHCONTRAST",
+                            "setAction": "SPI_SETHIGHCONTRAST",
+                            "uiParam": "struct_size",
+                            "pvParam": {
+                                "type": "struct",
+                                "name": "HIGHCONTRAST"
+                            }
+                        },
+                        {
+                            "settings": {
+                                "MouseTrails": {
+                                    "path": {
+                                        "get": "pvParam",
+                                        "set": "uiParam"
+                                    },
+                                    "value": 10
+                                }
+                            },
+                            "options": {
+                                "getAction": "SPI_GETMOUSETRAILS",
+                                "setAction": "SPI_SETMOUSETRAILS",
+                                "uiParam": 0,
+                                "pvParam": {
+                                    "type": "BOOL"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        processes: [ {
+            "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
+            "expect": 1
+        }]
     }
 ];
 
