@@ -33,7 +33,7 @@ var gpiiConfig = {
 
 var testDefs = [
     {
-        /*name: "Testing os_win7 using Flat matchmaker",
+        name: "Testing os_win7 using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "os_win7",
         settingsHandlers: {
@@ -320,7 +320,7 @@ var testDefs = [
                 "expect": "1"
             }
         ]
- /*   }, {
+    /*}, {
         name: "Testing os_gnome using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "os_gnome",
@@ -455,8 +455,8 @@ var testDefs = [
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
                 "expect": "1"
             }
-        ]
-     /*}, {
+        ]*/
+    /*}, {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig:  gpiiConfig,
         token: "screenreader_nvda",
@@ -481,7 +481,7 @@ var testDefs = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            "path": "C:\\Users\\kasper\\AppData\\Roaming\\nvda\\nvda.ini",
+                            "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -495,7 +495,7 @@ var testDefs = [
             "expect": "1"
         }
         ]
-    }, {*/
+    }, {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "screenreader_common",
@@ -536,7 +536,7 @@ var testDefs = [
                 "expect": "1"
             }
         ]
-    /*}, {
+    }, {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "screenreader_orca",
@@ -568,20 +568,8 @@ var testDefs = [
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
                 "expect": "1"
             }
-        ] */
+        ]*/ 
     }
 ];
 
-fluid.defaults("gpii.integrationTesting.tests", {
-    gradeNames: ["autoInit", "gpii.integrationTesting.testCaseHolder"],
-    testDefs: gpii.lifecycleManager.resolver().resolve(testDefs),
-    modules: [ {
-        name: "Full login/logout cycle",
-        tests: gpii.integrationTesting.buildTestFixtures(testDefs)
-    }]
-});
-
-
-fluid.test.runTests([
-    "gpii.integrationTesting.testEnv"
-]);
+gpii.integrationTesting.buildTests(testDefs);
