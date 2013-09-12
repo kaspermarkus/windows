@@ -173,7 +173,8 @@ var testDefs = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
-                "expect": "1"
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
         ]
     }, {
@@ -317,10 +318,11 @@ var testDefs = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
-                "expect": "1"
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
         ]
-    /*}, {
+    }, {
         name: "Testing os_gnome using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "os_gnome",
@@ -328,37 +330,9 @@ var testDefs = [
             "gpii.windows.spiSettingsHandler": {
                 "data": [ {
                     "settings": {
-                        "MenuHeight": {
-                            "path": "pvParam.iMenuHeight",
-                            "value": 0
-                        },
-                        "CaptionHeight": {
-                            "path": "pvParam.iCaptionHeight",
-                            "value": 0
-                        },
-                        "MenuFontHeight": {
-                            "path": "pvParam.lfMenuFont.lfHeight",
-                            "height": -9
-                        },
-                        "StatusFontHeight": {
-                            "path": "pvParam.lfStatusFont.lfHeight",
-                            "height": -9
-                        },
                         "CaptionFontHeight": {
                             "path": "pvParam.lfCaptionFont.lfHeight",
-                            "height": -9
-                        },
-                        "MessageFontHeight": {
-                            "path": "pvParam.lfMessageFont.lfHeight",
-                            "height": -9
-                        },
-                        "SmallCaptionHeight": {
-                            "path": "pvParam.iSmCaptionHeight",
-                            "value": 0
-                        },
-                        "SmallCaptionFontHeight": {
-                            "path": "pvParam.lfSmCaptionFont.lfHeight",
-                            "height": -9
+                            "value": -9
                         }
                     },
                     "options": {
@@ -453,10 +427,11 @@ var testDefs = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq Magnify.exe\" | find /I \"Magnify.exe\" /C",
-                "expect": "1"
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
-        ]*/
-    /*}, {
+        ]
+    }, {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig:  gpiiConfig,
         token: "screenreader_nvda",
@@ -490,10 +465,11 @@ var testDefs = [
             }
         },
         processes: [
-        {
-            "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-            "expect": "1"
-        }
+            {
+                "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
+                "expectConfigured": "1",
+                "expectRestored": "0"
+            }
         ]
     }, {
         name: "Testing screenreader_nvda using Flat matchmaker",
@@ -520,8 +496,6 @@ var testDefs = [
                             "speech.espeak.sayCapForCapitals": true
                         },
                         "options": {
-                            //"path": "C:\\Users\\kasper\\AppData\\Roaming\\nvda\\nvda.ini",
-
                             "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
@@ -533,7 +507,8 @@ var testDefs = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expect": "1"
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
         ]
     }, {
@@ -555,7 +530,7 @@ var testDefs = [
                             "virtualBuffers.autoSayAllOnPageLoad": false
                         },
                         "options": {
-                            "path": "C:\\Users\\kasper\\AppData\\Roaming\\nvda\\nvda.ini",
+                            "path": "${{environment}.APPDATA}\\nvda\\nvda.ini",
                             "allowNumberSignComments": true,
                             "allowSubSections": true
                         }
@@ -566,10 +541,11 @@ var testDefs = [
         processes: [
             {
                 "command": "tasklist /fi \"STATUS eq RUNNING\" /FI \"IMAGENAME eq nvda.exe\" | find /I \"nvda.exe\" /C",
-                "expect": "1"
+                "expectConfigured": "1",
+                "expectRestored": "0"
             }
-        ]*/ 
+        ]
     }
 ];
 
-gpii.integrationTesting.buildTests(testDefs);
+gpii.integrationTesting.buildTests(testDefs, gpiiConfig);
