@@ -1,6 +1,6 @@
 /*
 
-GPII Integration Testing
+GPII Acceptance Testing
 
 Copyright 2013 Raising the Floor International
 
@@ -23,16 +23,16 @@ fluid.require("../gpii/node_modules/registrySettingsHandler", require);
 fluid.require("../gpii/node_modules/registryResolver", require);
 fluid.require("../gpii/node_modules/spiSettingsHandler", require);
 
-require("../../node_modules/universal/tests/IntegrationTests.js", require);
+require("../../node_modules/universal/tests/AcceptanceTests.js", require);
 
-var configPath = path.resolve(__dirname, "./integrationTests/setup1/configs");
+var configPath = path.resolve(__dirname, "./acceptanceTests/setup1/configs");
 var gpiiConfig = {
    nodeEnv: "development-config",
    configPath: configPath
 };
 
 var testDefs = [
-    {
+    /*{
         name: "Testing os_win7 using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "os_win7",
@@ -511,7 +511,7 @@ var testDefs = [
                 "expectRestored": "0"
             }
         ]
-    }, {
+    }, */{
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "screenreader_orca",
@@ -548,4 +548,4 @@ var testDefs = [
     }
 ];
 
-gpii.integrationTesting.buildTests(testDefs, gpiiConfig);
+gpii.acceptanceTesting.buildTests(testDefs, gpiiConfig);
