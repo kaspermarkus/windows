@@ -32,7 +32,7 @@ var gpiiConfig = {
 };
 
 var testDefs = [
-    /*{
+    {
         name: "Testing os_win7 using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "os_win7",
@@ -511,7 +511,7 @@ var testDefs = [
                 "expectRestored": "0"
             }
         ]
-    }, */{
+    }, {
         name: "Testing screenreader_nvda using Flat matchmaker",
         gpiiConfig: gpiiConfig,
         token: "screenreader_orca",
