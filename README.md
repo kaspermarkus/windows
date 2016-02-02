@@ -1,40 +1,62 @@
 # GPII for Windows
 
 Contains platform-specific components of the GPII architecture for Windows. See http://gpii.net/ for overall details of the GPII
-project. After checkout out using git, this project will require node.js and npm to be installed - please consult
-http://wiki.gpii.net/w/Setting_Up_Your_Development_Environment for installation instructions.
+project. 
 
-Note that tests and function involving the High Contrast setting will fail on all current versions of Windows (including 
-Windows 7 SP1 and Windows 8 SP2) unless the following hotfix from Microsoft is applied: http://support.microsoft.com/kb/2516889
+# Windows Installation Instructions
 
-See http://issues.gpii.net/browse/GPII-49 for more details of this issue. 
+## GPII end-users
+We provide an official graphical GPII installer (.msi). This is linked from the [http://gpii.net](GPII website)
 
-# Grunt Builds
+## For devopers
 
-We are in the process of adding support for building and running utility tasks 
-with grunt.js. At some point these will replace the current build scripts.
+### Dependencies
 
-To use these, you must be running a recent version of npm, necessarily greater 
-than 1.4.  If you need to upgrade npm you can issue the following command:
+* Git
+ * Install GitHub for Windows - it includes the command line Msysgit which you run as "Git Shell".
+ * Or, for advanced developers, use Cygwin for a full Unix-like environment on Windows
 
-    npm install -g npm
+* Node.js
+ * GPII is dependent on node.js and is currently tested and stable with node.js 4.2.x (the long term support)
+ * nodejs can be found here: https://nodejs.org/en/download/. Download and follow the installation instructions.
 
-To build the GPII for Windows using grunt, perform the following:
+* node-gyp dependencies
+ * The dependencies are described here: https://github.com/nodejs/node-gyp#installation
+ * you dont need to actually install node-gyp, as this will be done as part of GPII, but you should install the dependencies (such as VisualStudio Express 2013, Python, etc).
 
-    git clone https://github.com/GPII/windows.git
-    cd windows
-    npm install --ignore-scripts=true
-    grunt build
+* Other:
+ * Windows 7, 64bit, has a bug with high-contrast mode. If you're running this Windows version, you'll need to install the hotfix linked from this Microsoft support page (http://support.microsoft.com/kb/2516889) (x64 only).
 
-Note that whenever you run the `npm install` task for this project, you must use the option appearing above.
+### Building the GPII Personalization Framework on Windows
+* Open up a git compatible command prompt (e.g. git shell)
+* Create a GPII directory
+ * `mkdir \gpii` (or wherever you prefer)
+ * `cd \gpii`
+* Clone the GPII Windows repository
+ * `git clone git://github.com/GPII/windows.git`
+ * `cd windows`
+* Install dependencies of the framework
+ * `npm install`
+* Make sure grunt is installed:
+ * `npm install grunt`
+ * `npm install -g grunt-cli`
+* Build everything, incl. getting the universal (cross platform code):
+ * `grunt build`
 
-# Old Builds
+### Starting the GPII Personalization framework
 
-This project is still bundled with command-line build scripts (with the same effect as the above grunt builds) - support for these
-will be withdrawn soon. You can operate these as follows:
+From the command prompt, inside the windows folder of the GPII (eg. C:\GPII\windows\), type the following:
+* `start.cmd`
 
+### Installing the USB and RFID listeners
+* Use the Windows installer found here: https://github.com/OpenDirective/GPII-windows/releases/tag/Listeners_V1.3.0
+* OR build the binaries by following the installation instructions http://github.com/windows/UsbUserListener/README.txt
 
-* `build.cmd` will check out GPII's universal project https://github.com/GPII/universal in a subdirectory. 
-* `start.cmd` will run the GPII personalisation system
+### Additional Windows Configuration and comments:
+* Increasing the buffor size for the command line (useful for bugreporting)
+ * Open a command line and right-click on the command line's window.
+ * In the context menu that pops up, select the "Layout" tab.
+ * In the layout tab, change the "Height" of the "Screen Buffer Size" to a much higher number, e.g. 900. Then click OK to confirm the change.
+ * As a result of this, most of the DOS windows that pop up when you start GPII will "store" more logging lines. These logging lines can be copied and pasted into bug reports. For guidance on how to copy those logging lines, see Microsoft's article To copy text from a command prompt window.
 
 
