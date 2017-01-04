@@ -12,7 +12,8 @@ Import-Module "$env:ChocolateyInstall\helpers\chocolateyInstaller.psm1" -Force -
 
 # Obtain some useful paths.
 $systemDrive = $env:SystemDrive
-$mainDir = "$systemDrive\vagrant"
+# mainDir is the parent of the scriptDir
+$mainDir = (get-item $scriptDir ).parent.FullName
 
 # Acquire information about the system and environment.
 $winVersion = [System.Environment]::OSVersion
@@ -33,5 +34,6 @@ Invoke-Command $msbuild "listeners.sln /nodeReuse:false /p:Configuration=Release
 
 Invoke-Environment "C:\Program Files (x86)\Microsoft Visual C++ Build Tools\vcbuildtools.bat"
 $testProcessHandlingDir = Join-Path $mainDir "gpii\node_modules\processHandling\test"
+Write-Verbose "testProcessHandlingDir is $($testProcessHandlingDir)"
 Invoke-Command "cl" "test-window.c" $testProcessHandlingDir
 rm (Join-Path $testProcessHandlingDir "test-window.obj")

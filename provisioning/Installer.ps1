@@ -6,7 +6,10 @@ Import-Module (Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) 'Prov
 $installerRepo = "https://github.com/gpii/gpii-wix-installer"
 $installerBranch = "v1.2.0"
 
-$mainDir = Join-Path $env:SystemDrive "vagrant"
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+# mainDir is the parent of the scriptDir
+$mainDir = (get-item $scriptDir ).parent.FullName
+
 $installerDir = Join-Path $env:SystemDrive "installer"
 $npm = "npm" -f $env:SystemDrive
 $git = "git" -f $env:SystemDrive
