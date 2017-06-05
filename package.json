@@ -10,7 +10,7 @@
         "ref": "1",
         "ref-struct": "1",
         "ref-array": "1.1.2",
-        "universal": "kaspermarkus/universal#12a30b73416407215b58dd136fd60b15e228830d",
+        "universal": "kaspermarkus/universal#6109f922c971f97f422ec21b00341ad05aabeaf8",
         "nan": "amatas/nan#GPII-1929"
     },
     "devDependencies": {
